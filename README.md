@@ -6,6 +6,16 @@ A full-stack app using [Laravel](https://laravel.com) with a **Vue 3 SPA** (Comp
 
 There is **no Inertia.js, Fortify, or Wayfinder** in this stack: the browser loads one Blade shell (`resources/views/app.blade.php`) and all app routes are handled client-side, except signed links (email verification, password reset) that hit Laravel first and then redirect into the SPA.
 
+## Tech Stack
+
+- **Backend**: Laravel 13, PHP 8.3+
+- **Dashboard**: Vue 3.5 (Composition API), TypeScript 5
+- **Styling UI**: Tailwind CSS v4, shadcn-vue (reka-ui)
+- **State & Routing**: Pinia, Vue Router
+- **Build Tool**: Vite 8
+- **Authentication**: Laravel Sanctum
+- **Package Manager**: pnpm 10, Composer
+
 ## Requirements
 
 - PHP **8.3+** and [Composer](https://getcomposer.org)
@@ -45,45 +55,45 @@ pnpm run dev
 
 High-level repository layout:
 
-| Path | Role |
-|------|------|
-| `app/Modules/Api/` | Bounded context: HTTP API (`Http/Controllers`, `Http/Requests`, `Http/Resources`), services, repositories, events, `Models/User.php`, `Routes/api.php` |
-| `app/Http/Middleware/` | Laravel middleware (e.g. appearance cookie) |
-| `app/Providers/` | Service providers |
-| `config/` | App config; `config/services.php` includes `services.dashboard.prefix` from `DASHBOARD_PREFIX` (default `admin`) for the SPA dashboard/settings URL segment |
-| `database/` | Migrations, factories, seeders |
-| `routes/` | `web.php` — SPA catch-all + signed verification/reset redirects; `console.php` |
-| `resources/views/app.blade.php` | Blade shell for the SPA; injects `window.__DASHBOARD_PREFIX__` before Vite |
-| `resources/css/` | Tailwind / global CSS entry |
-| `resources/js/` | Vue 3 SPA (TypeScript) |
-| `tests/` | PHPUnit feature tests |
+| Path                            | Role                                                                                                                                                        |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app/Modules/Api/`              | Bounded context: HTTP API (`Http/Controllers`, `Http/Requests`, `Http/Resources`), services, repositories, events, `Models/User.php`, `Routes/api.php`      |
+| `app/Http/Middleware/`          | Laravel middleware (e.g. appearance cookie)                                                                                                                 |
+| `app/Providers/`                | Service providers                                                                                                                                           |
+| `config/`                       | App config; `config/services.php` includes `services.dashboard.prefix` from `DASHBOARD_PREFIX` (default `admin`) for the SPA dashboard/settings URL segment |
+| `database/`                     | Migrations, factories, seeders                                                                                                                              |
+| `routes/`                       | `web.php` — SPA catch-all + signed verification/reset redirects; `console.php`                                                                              |
+| `resources/views/app.blade.php` | Blade shell for the SPA; injects `window.__DASHBOARD_PREFIX__` before Vite                                                                                  |
+| `resources/css/`                | Tailwind / global CSS entry                                                                                                                                 |
+| `resources/js/`                 | Vue 3 SPA (TypeScript)                                                                                                                                      |
+| `tests/`                        | PHPUnit feature tests                                                                                                                                       |
 
 `resources/js/` (frontend) at a glance:
 
-| Path | Role |
-|------|------|
+| Path                 | Role                                                                  |
+| -------------------- | --------------------------------------------------------------------- |
 | `app.ts` / `App.vue` | Entry, root layout; `App.vue` sets `lang` / `dir` (e.g. RTL for `ar`) |
-| `router/` | Vue Router; dashboard/settings paths use `config/dashboardPrefix.ts` |
-| `api/` | Axios instance, auth header, API helpers |
-| `stores/` | Pinia (`auth`, `authConfig` — cached API config & social providers) |
-| `i18n/` | `vue-i18n` setup; `locales/*.json` (`en`, `vi`, `ar`) |
-| `layouts/` | `app/` (sidebar shell), `auth/` (split / simple), `settings/` |
-| `pages/` | Route views: `Welcome`, `Dashboard`, `auth/*`, `settings/*` |
-| `components/` | App components + `ui/` (shadcn-vue primitives) |
-| `composables/` | Shared Vue composables |
-| `types/` | TypeScript types |
+| `router/`            | Vue Router; dashboard/settings paths use `config/dashboardPrefix.ts`  |
+| `api/`               | Axios instance, auth header, API helpers                              |
+| `stores/`            | Pinia (`auth`, `authConfig` — cached API config & social providers)   |
+| `i18n/`              | `vue-i18n` setup; `locales/*.json` (`en`, `vi`, `ar`)                 |
+| `layouts/`           | `app/` (sidebar shell), `auth/` (split / simple), `settings/`         |
+| `pages/`             | Route views: `Welcome`, `Dashboard`, `auth/*`, `settings/*`           |
+| `components/`        | App components + `ui/` (shadcn-vue primitives)                        |
+| `composables/`       | Shared Vue composables                                                |
+| `types/`             | TypeScript types                                                      |
 
 ## Useful scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm run build` | Production asset build (Vite) |
-| `pnpm run build:ssr` | Client + SSR build (only if you add an SSR entry) |
-| `pnpm run lint` / `pnpm run lint:check` | ESLint |
-| `pnpm run format` / `pnpm run format:check` | Prettier (`resources/`) |
-| `pnpm run types:check` | TypeScript check via `vue-tsc` |
-| `composer run test` | Pint (dry-run) + PHPUnit |
-| `composer run ci:check` | Frontend lint/format/types + tests |
+| Command                                     | Description                                       |
+| ------------------------------------------- | ------------------------------------------------- |
+| `pnpm run build`                            | Production asset build (Vite)                     |
+| `pnpm run build:ssr`                        | Client + SSR build (only if you add an SSR entry) |
+| `pnpm run lint` / `pnpm run lint:check`     | ESLint                                            |
+| `pnpm run format` / `pnpm run format:check` | Prettier (`resources/`)                           |
+| `pnpm run types:check`                      | TypeScript check via `vue-tsc`                    |
+| `composer run test`                         | Pint (dry-run) + PHPUnit                          |
+| `composer run ci:check`                     | Frontend lint/format/types + tests                |
 
 ## Backend: `Api` module
 
@@ -93,27 +103,27 @@ HTTP JSON API and domain logic for auth, profile, password, and dashboard live i
 
 [Laravel Sanctum](https://laravel.com/docs/sanctum) issues **personal access tokens**. After login or register, the SPA stores `token` and sends `Authorization: Bearer <token>` (see `resources/js/api/http.ts`).
 
-| Method | Path | Auth | Description |
-|--------|------|------|-------------|
-| `POST` | `/api/v1/auth/register` | — | Register (`name`, `email`, `password`, `password_confirmation`, optional `device_name`) — returns token + user |
-| `POST` | `/api/v1/auth/token` | — | Issue token (`email`, `password`, optional `device_name`) |
-| `POST` | `/api/v1/auth/otp/request` | — | Email sign-in: send 6-digit code (`email`) — same JSON message whether or not the user exists |
-| `POST` | `/api/v1/auth/otp/verify` | — | Redeem code (`email`, `code`, `device_name`?) — returns token or `two_factor_required` + `pending_token` like password login |
-| `DELETE` | `/api/v1/auth/token` | Sanctum | Revoke current token (logout) |
-| `POST` | `/api/v1/auth/forgot-password` | — | Request reset email (`email`) |
-| `POST` | `/api/v1/auth/reset-password` | — | Reset password (`token`, `email`, `password`, `password_confirmation`) |
-| `POST` | `/api/v1/auth/email/resend` | Sanctum | Resend email verification |
-| `GET` | `/api/v1/me` | Sanctum | Current user (`{ data: { ... } }`) |
-| `PATCH` | `/api/v1/me` | Sanctum | Update name/email |
-| `PUT` | `/api/v1/me/password` | Sanctum | Change password (throttled) |
-| `DELETE` | `/api/v1/me` | Sanctum + `verified` | Delete account — JSON body: `{ "password": "..." }` (password accounts only; OAuth-only users must set a password first) |
-| `GET` | `/api/v1/dashboard` | Sanctum + `verified` | Dashboard overview JSON |
-| `GET` | `/api/v1/auth/social/providers` | — | `{ data: { google, github } }` booleans (whether OAuth is configured) |
-| `POST` | `/api/v1/auth/social/exchange` | — | After web OAuth callback: `{ "exchange_token": "...", "device_name"?: "spa" }` → token or `two_factor_required` + `pending_token` |
-| `POST` | `/api/v1/auth/token/two-factor` | — | `{ "pending_token", "code", "device_name"?: "spa" }` — completes login when 2FA is enabled |
-| `POST` | `/api/v1/me/two-factor` | Sanctum | Start TOTP setup — returns `secret` + `otpauth_url` |
-| `POST` | `/api/v1/me/two-factor/confirm` | Sanctum | `{ "code" }` — enables 2FA; response includes one-time `recovery_codes` |
-| `DELETE` | `/api/v1/me/two-factor` | Sanctum | Body: `{ "code", "current_password"?: "..." }` — disable 2FA (password required if the user has a password) |
+| Method   | Path                            | Auth                 | Description                                                                                                                       |
+| -------- | ------------------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `POST`   | `/api/v1/auth/register`         | —                    | Register (`name`, `email`, `password`, `password_confirmation`, optional `device_name`) — returns token + user                    |
+| `POST`   | `/api/v1/auth/token`            | —                    | Issue token (`email`, `password`, optional `device_name`)                                                                         |
+| `POST`   | `/api/v1/auth/otp/request`      | —                    | Email sign-in: send 6-digit code (`email`) — same JSON message whether or not the user exists                                     |
+| `POST`   | `/api/v1/auth/otp/verify`       | —                    | Redeem code (`email`, `code`, `device_name`?) — returns token or `two_factor_required` + `pending_token` like password login      |
+| `DELETE` | `/api/v1/auth/token`            | Sanctum              | Revoke current token (logout)                                                                                                     |
+| `POST`   | `/api/v1/auth/forgot-password`  | —                    | Request reset email (`email`)                                                                                                     |
+| `POST`   | `/api/v1/auth/reset-password`   | —                    | Reset password (`token`, `email`, `password`, `password_confirmation`)                                                            |
+| `POST`   | `/api/v1/auth/email/resend`     | Sanctum              | Resend email verification                                                                                                         |
+| `GET`    | `/api/v1/me`                    | Sanctum              | Current user (`{ data: { ... } }`)                                                                                                |
+| `PATCH`  | `/api/v1/me`                    | Sanctum              | Update name/email                                                                                                                 |
+| `PUT`    | `/api/v1/me/password`           | Sanctum              | Change password (throttled)                                                                                                       |
+| `DELETE` | `/api/v1/me`                    | Sanctum + `verified` | Delete account — JSON body: `{ "password": "..." }` (password accounts only; OAuth-only users must set a password first)          |
+| `GET`    | `/api/v1/dashboard`             | Sanctum + `verified` | Dashboard overview JSON                                                                                                           |
+| `GET`    | `/api/v1/auth/social/providers` | —                    | `{ data: { google, github } }` booleans (whether OAuth is configured)                                                             |
+| `POST`   | `/api/v1/auth/social/exchange`  | —                    | After web OAuth callback: `{ "exchange_token": "...", "device_name"?: "spa" }` → token or `two_factor_required` + `pending_token` |
+| `POST`   | `/api/v1/auth/token/two-factor` | —                    | `{ "pending_token", "code", "device_name"?: "spa" }` — completes login when 2FA is enabled                                        |
+| `POST`   | `/api/v1/me/two-factor`         | Sanctum              | Start TOTP setup — returns `secret` + `otpauth_url`                                                                               |
+| `POST`   | `/api/v1/me/two-factor/confirm` | Sanctum              | `{ "code" }` — enables 2FA; response includes one-time `recovery_codes`                                                           |
+| `DELETE` | `/api/v1/me/two-factor`         | Sanctum              | Body: `{ "code", "current_password"?: "..." }` — disable 2FA (password required if the user has a password)                       |
 
 Example:
 

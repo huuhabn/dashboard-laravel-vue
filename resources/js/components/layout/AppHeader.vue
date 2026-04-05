@@ -72,7 +72,7 @@ const mainNavItems = computed<NavItem[]>(() => [
 const rightNavItems = computed<NavItem[]>(() => [
     {
         title: t('nav.repository'),
-        href: 'https://github.com/laravel/vue-starter-kit',
+        href: 'https://github.com/huuhabn/dashboard-laravel-vue',
         icon: Folder,
     },
     {

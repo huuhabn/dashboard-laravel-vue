@@ -2,6 +2,8 @@
 
 [Vietnamese / Tiếng Việt](README_VI.md)
 
+![Screenshot](screenshots/signed.png)
+
 A full-stack app using [Laravel](https://laravel.com) with a **Vue 3 SPA** (Composition API, TypeScript): [Vue Router](https://router.vuejs.org), [Pinia](https://pinia.vuejs.org), and [axios](https://axios-http.com) calling a REST API. Styling uses [Tailwind CSS](https://tailwindcss.com) v4 and [shadcn-vue](https://www.shadcn-vue.com). Authentication for the SPA is **Laravel Sanctum** personal access tokens (Bearer), stored in `localStorage` and sent on each request.
 
 There is **no Inertia.js, Fortify, or Wayfinder** in this stack: the browser loads one Blade shell (`resources/views/app.blade.php`) and all app routes are handled client-side, except signed links (email verification, password reset) that hit Laravel first and then redirect into the SPA.
@@ -157,6 +159,9 @@ When email/password login or social exchange succeeds and the user has confirmed
 
 CLI config lives in `components.json`. Add components using the [shadcn-vue installation docs](https://www.shadcn-vue.com/docs/installation).
 
-## pnpm notes
+## Contributing
 
-This repo uses **pnpm**; `package-lock.json` is ignored. `.npmrc` sets `ignore-workspace=true` so the project stays its own root when a parent directory on your machine is a pnpm workspace. Remove that line if you intentionally nest this app inside a larger pnpm monorepo.
+We love our contributors! Here's how you can contribute:
+
+- [Open an issue](https://github.com/huuhabn/dashboard-laravel-vue/issues) if you believe you've encountered a bug.
+- Make a [pull request](https://github.com/huuhabn/dashboard-laravel-vue/pull) to add new features/make quality-of-life improvements/fix bugs.

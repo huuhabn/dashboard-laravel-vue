@@ -6,7 +6,6 @@ import { RouterLink } from 'vue-router';
 import Heading from '@/components/common/Heading.vue';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { useCurrentUrl } from '@/composables/useCurrentUrl';
 import { toUrl } from '@/lib/utils';
 import type { NavItem } from '@/types';
 
@@ -29,8 +28,6 @@ const sidebarNavItems = computed<NavItem[]>(() => [
         icon: Palette,
     },
 ]);
-
-const { isCurrentOrParentUrl } = useCurrentUrl();
 </script>
 
 <template>
@@ -50,14 +47,12 @@ const { isCurrentOrParentUrl } = useCurrentUrl();
                         v-for="item in sidebarNavItems"
                         :key="toUrl(item.href)"
                         variant="ghost"
-                        :class="[
-                            'w-full justify-start',
-                            { 'bg-muted': isCurrentOrParentUrl(item.href) },
-                        ]"
+                        class="w-full justify-start"
                         as-child
                     >
                         <RouterLink
                             :to="item.href"
+                            active-class="bg-muted"
                             class="flex w-full items-center gap-2 text-start"
                         >
                             <component

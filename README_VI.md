@@ -2,6 +2,8 @@
 
 [English](README.md)
 
+![Screenshot](screenshots/signed.png)
+
 Ứng dụng full-stack dùng [Laravel](https://laravel.com) với **SPA Vue 3** (Composition API, TypeScript): [Vue Router](https://router.vuejs.org), [Pinia](https://pinia.vuejs.org) và [axios](https://axios-http.com) gọi REST API. Giao diện dùng [Tailwind CSS](https://tailwindcss.com) v4 và [shadcn-vue](https://www.shadcn-vue.com). Xác thực phía SPA là **Laravel Sanctum** (personal access token, Bearer), lưu trong `localStorage` và gửi kèm mỗi request.
 
 **Không** dùng Inertia.js, Fortify hay Wayfinder: trình duyệt chỉ nhận một shell Blade (`resources/views/app.blade.php`), còn định tuyến ứng dụng do Vue Router xử lý; riêng link có chữ ký (xác minh email, đặt lại mật khẩu) vào Laravel trước rồi redirect vào SPA.

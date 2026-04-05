@@ -33,7 +33,7 @@ const mainNavItems = computed<NavItem[]>(() => [
 const footerNavItems = computed<NavItem[]>(() => [
     {
         title: t('nav.repository'),
-        href: 'https://github.com/vexaltrix/laravel-vue-starter',
+        href: 'https://github.com/huuhabn/dashboard-laravel-vue',
         icon: Folder,
     },
     {

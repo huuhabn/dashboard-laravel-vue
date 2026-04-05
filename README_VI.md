@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-![Screenshot](screenshots/signed.png)
+![Screenshot](screenshots/settings.png)
 
 Ứng dụng full-stack dùng [Laravel](https://laravel.com) với **SPA Vue 3** (Composition API, TypeScript): [Vue Router](https://router.vuejs.org), [Pinia](https://pinia.vuejs.org) và [axios](https://axios-http.com) gọi REST API. Giao diện dùng [Tailwind CSS](https://tailwindcss.com) v4 và [shadcn-vue](https://www.shadcn-vue.com). Xác thực phía SPA là **Laravel Sanctum** (personal access token, Bearer), lưu trong `localStorage` và gửi kèm mỗi request.
 

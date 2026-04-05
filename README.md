@@ -2,7 +2,7 @@
 
 [Vietnamese / Tiếng Việt](README_VI.md)
 
-![Screenshot](screenshots/signed.png)
+![Screenshot](screenshots/settings.png)
 
 A full-stack app using [Laravel](https://laravel.com) with a **Vue 3 SPA** (Composition API, TypeScript): [Vue Router](https://router.vuejs.org), [Pinia](https://pinia.vuejs.org), and [axios](https://axios-http.com) calling a REST API. Styling uses [Tailwind CSS](https://tailwindcss.com) v4 and [shadcn-vue](https://www.shadcn-vue.com). Authentication for the SPA is **Laravel Sanctum** personal access tokens (Bearer), stored in `localStorage` and sent on each request.
 
